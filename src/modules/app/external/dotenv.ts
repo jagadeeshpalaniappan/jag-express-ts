@@ -1,5 +1,5 @@
 import dotenv, { DotenvParseOutput } from 'dotenv';
-
+// NOTE: do not import anything here (not even logger/winson), this needs to be loaded first
 export const initEnvVariables = async (): Promise<DotenvParseOutput> => {
   try {
     console.log('## ENV:INTIALIZATION::START');
@@ -9,7 +9,6 @@ export const initEnvVariables = async (): Promise<DotenvParseOutput> => {
     return parsed;
   } catch (error) {
     console.error('## ENV:INTIALIZATION::FAILED');
-    console.error('⚠️  .env file not found  ⚠️');
     console.error(error);
     process.exit(1);
   }
