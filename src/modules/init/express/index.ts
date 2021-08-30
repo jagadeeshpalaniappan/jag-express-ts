@@ -1,19 +1,38 @@
-import express from 'express';
+import express, { Express } from 'express';
 import { initMiddleware, initPostMiddleware } from './middleware';
 import { initApiRoutes } from './routes';
+import { appConfig } from '../../common/config';
 
-// Create Express server
-const app = express();
+const PORT = appConfig.express.port;
 
-// Express configuration
-app.set('port', process.env.PORT || 3000);
-initMiddleware(app);
-initApiRoutes(app);
-initPostMiddleware(app);
+const startExpressServer = (app: Express) => {
+  return new Promise((resolve, reject) => {
+    // Start Express server
+    app.listen(PORT, () => {
+      resolve(app);
+    });
+    app.on('error', err => {
+      reject(err);
+    });
+  });
+};
 
-// Start Express server
-app.listen(app.get('port'), () => {
-  console.log(app.get('port'), app.get('env'));
-  console.log('  App -- is running at http://localhost:%d in %s mode', app.get('port'), app.get('env'));
-  console.log('  Press CTRL-C to stop\n');
-});
+export const initExpress = async (): Promise<Express> => {
+  try {
+    console.error('## EXPRESS:INTIALIZATION::START');
+    const app = express();
+
+    initMiddleware(app);
+    initApiRoutes(app);
+    initPostMiddleware(app);
+    await startExpressServer(app);
+
+    console.log('## EXPRESS:INTIALIZATION::END');
+    console.log(`http://localhost:${PORT} in ${app.get('env')} mode`);
+
+    return app;
+  } catch (error) {
+    console.error('## EXPRESS:INTIALIZATION::FAILED');
+    throw error;
+  }
+};

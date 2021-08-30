@@ -1,3 +1,5 @@
-import './modules/init/dotenv';
-import './modules/init/mongoose';
-import './modules/init/express';
+import { initEnvVariables } from './modules/init/dotenv';
+initEnvVariables(); // This required - before we do any initialization
+
+import { initApp } from './modules/init';
+initApp();
