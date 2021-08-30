@@ -1,5 +1,5 @@
 interface LoggerFn {
-  (logMessage: string, ...any: any): void;
+  (logMessage?: string, ...any: any): void;
 }
 
 export interface Logger {
@@ -7,4 +7,7 @@ export interface Logger {
   warn: LoggerFn;
   info: LoggerFn;
   error: LoggerFn;
+  start: LoggerFn;
+  end: LoggerFn;
+  failed: LoggerFn;
 }

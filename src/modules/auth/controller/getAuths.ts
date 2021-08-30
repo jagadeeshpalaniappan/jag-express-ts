@@ -4,13 +4,13 @@ import { getLogger } from '../../app/logger';
 const logger = getLogger('authCtrl.signIn');
 export const getAuths = async (req: Request, res: Response): Promise<void> => {
   try {
-    logger.info('START');
+    logger.start();
     const query = {};
     const auths = await Auth.find(query);
-    logger.info('END');
+    logger.end();
     res.json({ auths }).status(200);
   } catch (error) {
-    logger.info('FAILED');
+    logger.failed();
     res.json({ error }).status(500);
   }
 };

@@ -1,6 +1,10 @@
 import winstonLoggerInst from './external/winston';
 import { Logger } from './types/logger';
 
+export const START = 'START';
+export const END = 'END';
+export const FAILED = 'FAILED';
+
 export const getLogger = (fileName: string): Logger => {
   const logger = {
     debug: function (logMessage: string, ...any: any) {
@@ -14,6 +18,15 @@ export const getLogger = (fileName: string): Logger => {
     },
     error: function (logMessage: string, ...any: any) {
       winstonLoggerInst.error(fileName + '::' + logMessage, ...any);
+    },
+    start: function (logMessage: string, ...any: any) {
+      winstonLoggerInst.debug(`${fileName}::${START}::${logMessage}`, ...any);
+    },
+    end: function (logMessage: string, ...any: any) {
+      winstonLoggerInst.debug(`${fileName}::${END}::${logMessage}`, ...any);
+    },
+    failed: function (logMessage: string, ...any: any) {
+      winstonLoggerInst.error(`${fileName}::${FAILED}::${logMessage}`, ...any);
     },
   };
 

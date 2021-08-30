@@ -8,7 +8,7 @@ const logger = getLogger('authCtrl.signIn');
 
 export const signIn = async (req: Request, res: Response): Promise<void> => {
   try {
-    logger.info('START');
+    logger.start();
     const { username, password } = req.body;
 
     const autDoc = await Auth.findOne({ username });
@@ -20,10 +20,10 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
     const { _id, roles } = autDoc;
     const token = generateToken(_id, username, roles);
 
-    logger.info('END');
+    logger.end();
     res.json({ autDoc, token }).status(200);
   } catch (error) {
-    logger.error('FAILED');
+    logger.failed();
     logger.error(error);
     res.json({ error }).status(500);
   }

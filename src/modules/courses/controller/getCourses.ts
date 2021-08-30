@@ -4,13 +4,13 @@ import { getLogger } from '../../app/logger';
 const logger = getLogger('courseCtrl.getCourses');
 export const getCourses = async (req: Request, res: Response): Promise<void> => {
   try {
-    logger.info('START');
+    logger.start();
     const query = {};
     const courses = await Course.find(query);
-    logger.info('END');
+    logger.end();
     res.json({ courses }).status(200);
   } catch (error) {
-    logger.info('FAILED');
+    logger.failed();
     res.json({ error }).status(500);
   }
 };
