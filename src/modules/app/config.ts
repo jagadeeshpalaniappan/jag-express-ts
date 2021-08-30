@@ -10,4 +10,8 @@ export const appConfig = {
   winston: {
     logLevel: process.env.LOG_LEVEL || 'silly',
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    algorithm: process.env.JWT_ALGO,
+  },
 };
