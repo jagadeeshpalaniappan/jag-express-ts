@@ -12,12 +12,12 @@ const getHashedPassword = async (password: string) => {
 };
 export const signUp = async (req: Request, res: Response): Promise<void> => {
   try {
-    logger.info('START1');
-    const { username, password } = req.body;
+    logger.info('START');
+    const { username, password, roles } = req.body;
 
     const { hashedPassword, salt } = await getHashedPassword(password);
 
-    const authDoc = new Auth({ username, password: hashedPassword, salt });
+    const authDoc = new Auth({ username, password: hashedPassword, salt, roles });
     const data = await authDoc.save();
     logger.info('END');
     res.json({ data }).status(200);

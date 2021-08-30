@@ -4,7 +4,7 @@ export type AuthDocument = mongoose.Document & {
   username: string;
   password: string;
   salt: string;
-  role: string;
+  roles: Array<string>;
   name: string;
 };
 
@@ -18,7 +18,7 @@ const authSchema = new mongoose.Schema<AuthDocument>(
     },
     password: String,
     salt: String,
-    role: String,
+    roles: [String],
     name: String,
   },
   { timestamps: true },
