@@ -1,19 +1,20 @@
-import { initMongoose } from './external/mongoose';
 import { initExpress } from './external/express/init';
-
-import { END, FAILED, getLogger, START } from './logger';
+import { initMongoose } from './external/mongoose';
+import { getLogger } from './logger';
 import { App } from './types/init';
-const logger = getLogger('## APP:INTIALIZATION');
+
+const logKey = '## APP:INTIALIZATION';
+const logger = getLogger(logKey);
 
 export const initApp = async (): Promise<App> => {
   try {
-    logger.info(START);
+    logger.start(logKey);
     const mongooseDb = await initMongoose();
     const expressApp = await initExpress();
-    logger.info(END);
+    logger.end(logKey);
     return { mongooseDb, expressApp };
   } catch (error) {
-    logger.error(FAILED);
+    logger.failed(logKey);
     logger.error(error);
     process.exit(1);
   }

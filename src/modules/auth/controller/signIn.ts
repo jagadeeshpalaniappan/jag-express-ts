@@ -1,29 +1,18 @@
-import argon2 from 'argon2';
 import { Request, Response } from 'express';
-
 import { getLogger } from '../../app/logger';
-import { Auth } from '../models/Auth';
-import { generateToken } from '../utils/generateToken';
-const logger = getLogger('authCtrl.signIn');
+import authService from '../service';
 
 export const signIn = async (req: Request, res: Response): Promise<void> => {
+  const logKey = 'authCtrl.signIn';
+  const logger = getLogger();
+  logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);
   try {
-    logger.start();
-    const { username, password } = req.body;
-
-    const autDoc = await Auth.findOne({ username });
-    if (!autDoc) throw new Error('User not registered');
-
-    const validPassword = await argon2.verify(autDoc.password, password);
-    if (!validPassword) throw new Error('Invalid Password');
-
-    const { _id, roles } = autDoc;
-    const token = generateToken(_id, username, roles);
-
-    logger.end();
-    res.json({ autDoc, token }).status(200);
+    logger.start(logKey);
+    const data = await authService.signIn(logger, req.body);
+    logger.end(logKey);
+    res.json(data).status(200);
   } catch (error) {
-    logger.failed();
+    logger.failed(logKey);
     logger.error(error);
     res.json({ error }).status(500);
   }
