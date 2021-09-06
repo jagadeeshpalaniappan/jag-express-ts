@@ -1,3 +1,4 @@
+import { log } from 'console';
 import errorHandler from 'errorhandler';
 import { Express } from 'express';
 import { IExpressNextFn, IExpressReq, IExpressRes } from '../../../auth/types';

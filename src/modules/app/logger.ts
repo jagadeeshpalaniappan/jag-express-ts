@@ -1,3 +1,4 @@
+import { AppError, getErr } from './error';
 import winstonLoggerInst from './external/winston';
 import { Logger } from './types/logger';
 
@@ -36,14 +37,21 @@ export const getLogger = (): Logger => {
       ...any,
     });
   };
-  logger.error = function (logKey: string, logMessage: string, ...any: any) {
+  logger.error = function (logKey: string, logMessage: string | AppError, ...any: any) {
     // winstonLoggerInst.error(fileName + '::' + logMessage, ...any);
-    winstonLoggerInst.log({
+    let log = {
       level: 'error',
-      message: `${logKey}::${logMessage}`,
       ...logger.traceInfo,
       ...any,
-    });
+    };
+    if (logMessage instanceof AppError) {
+      const message = getErr(logMessage.appErr, true);
+      log = { ...log, logKey, message };
+    } else {
+      const message = `${logKey}::${logMessage}`;
+      log = { ...log, logKey, message };
+    }
+    winstonLoggerInst.log(log);
   };
   logger.start = function (logKey: string, logMessage: string = '', ...any: any) {
     // winstonLoggerInst.debug(`${fileName}::${START}::${logMessage}`, ...any);

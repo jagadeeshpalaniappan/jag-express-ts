@@ -15,6 +15,7 @@ export const getCourses = async (req: IExpressReq, res: IExpressRes): Promise<vo
     res.json({ courses }).status(200);
   } catch (error) {
     logger.failed(logKey);
+    logger.error(logKey, error);
     res.json({ error }).status(500);
   }
 };
