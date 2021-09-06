@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { Auth } from '../models/Auth';
 import { getLogger } from '../../app/logger';
-export const getAuths = async (req: Request, res: Response): Promise<void> => {
+import { Auth } from '../models/Auth';
+import { IExpressReq, IExpressRes } from '../types';
+export const getAuths = async (req: IExpressReq, res: IExpressRes): Promise<void> => {
   const logKey = 'authCtrl.getAuths';
   const logger = getLogger();
   logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);

@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 export interface IAuthToken {
   id: string;
@@ -10,3 +10,7 @@ export interface IAuthToken {
 export interface IExpressReq extends Request {
   token: IAuthToken;
 }
+
+export type IExpressRes = Response;
+
+export type IExpressNextFn = NextFunction;

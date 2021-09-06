@@ -1,9 +1,8 @@
-import { NextFunction, Response } from 'express';
-import { IExpressReq } from '../types';
-import authService from '../service';
 import { getLogger } from '../../app/logger';
+import authService from '../service';
+import { IExpressNextFn, IExpressReq, IExpressRes } from '../types';
 
-export const bindAuthUser = async (req: IExpressReq, res: Response, next: NextFunction): Promise<void> => {
+export const bindAuthUser = async (req: IExpressReq, res: IExpressRes, next: IExpressNextFn): Promise<void> => {
   const logKey = 'authCtrl.getAuths';
   const logger = getLogger();
   logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);

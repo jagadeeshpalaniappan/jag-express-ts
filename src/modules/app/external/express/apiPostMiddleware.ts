@@ -1,7 +1,8 @@
 import errorHandler from 'errorhandler';
-import { Express, Request, Response, NextFunction } from 'express';
+import { Express } from 'express';
+import { IExpressNextFn, IExpressReq, IExpressRes } from '../../../auth/types';
 
-const handleIsAuthMiddleware = (err: any, _req: Request, res: Response, next: NextFunction) => {
+const handleIsAuthMiddleware = (err: any, _req: IExpressReq, res: IExpressRes, next: IExpressNextFn) => {
   // Handle 401 thrown by 'express-jwt' library
   if (err.name === 'UnauthorizedError') {
     return res.status(err.status).send({ message: err.message }).end();

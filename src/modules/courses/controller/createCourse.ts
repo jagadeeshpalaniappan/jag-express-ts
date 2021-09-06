@@ -1,8 +1,8 @@
-import { Request, Response } from 'express';
-import courseService from '../service';
 import { getLogger } from '../../app/logger';
+import { IExpressReq, IExpressRes } from '../../auth/types';
+import courseService from '../service';
 
-export const createCourse = async (req: Request, res: Response): Promise<void> => {
+export const createCourse = async (req: IExpressReq, res: IExpressRes): Promise<void> => {
   const logKey = 'courseCtrl.createCourse';
   const logger = getLogger();
   logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);

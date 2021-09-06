@@ -1,8 +1,8 @@
-import { NextFunction, Response } from 'express';
-import { IExpressReq } from '../types';
+import { NextFunction } from 'express';
+import { IExpressReq, IExpressRes } from '../types';
 
 export const canAccess = (resourceIds: string[]) => {
-  return (req: IExpressReq, res: Response, next: NextFunction): void => {
+  return (req: IExpressReq, res: IExpressRes, next: NextFunction): void => {
     let hasMatchingResourceId = false;
     if (req.token && req.token.roles && req.token.roles.length > 0) {
       const rolesSet = new Set(req.token.roles);
