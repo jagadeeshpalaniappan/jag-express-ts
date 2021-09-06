@@ -1,3 +1,4 @@
 import { signUp } from './signUp';
 import { signIn } from './signIn';
-export default { signIn, signUp };
+import { getAuthUserById } from './getAuthUserById';
+export default { getAuthUserById, signIn, signUp };

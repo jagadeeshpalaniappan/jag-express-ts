@@ -4,7 +4,7 @@ import { getLogger } from './logger';
 import { App } from './types/init';
 
 const logKey = '## APP:INTIALIZATION';
-const logger = getLogger(logKey);
+const logger = getLogger();
 
 export const initApp = async (): Promise<App> => {
   try {

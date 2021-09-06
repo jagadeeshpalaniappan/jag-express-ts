@@ -1,13 +1,16 @@
-import { Request, Response } from 'express';
-import courseService from '../service';
+import { Response } from 'express';
+import { IExpressReq } from 'src/modules/auth/types';
 import { getLogger } from '../../app/logger';
+import courseService from '../service';
 
-export const getCourses = async (req: Request, res: Response): Promise<void> => {
+export const getCourses = async (req: IExpressReq, res: Response): Promise<void> => {
   const logKey = 'courseCtrl.getCourses';
   const logger = getLogger();
   logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);
   try {
     logger.start(logKey);
+    logger.info('::toke::', JSON.stringify(req.token));
+    logger.info('::user::', JSON.stringify(req.user));
     const courses = await courseService.getCourses(logger);
     logger.end(logKey);
     res.json({ courses }).status(200);
