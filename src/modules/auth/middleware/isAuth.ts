@@ -1,5 +1,5 @@
 import jwt from 'express-jwt';
-import { appConfig } from '../../app/config';
+import { appConfig } from '../../app/config/config';
 import { IExpressReq } from '../types';
 
 /**

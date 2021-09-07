@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { appConfig } from '../config';
+import { appConfig } from './config';
 
 const transports = [];
 if (process.env.NODE_ENV !== 'development') {

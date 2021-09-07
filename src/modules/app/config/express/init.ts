@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { appConfig } from '../../config';
+import { appConfig } from '../config';
 import { getLogger } from '../../logger';
 import { initApiPostMiddleware } from './apiPostMiddleware';
 import { initApiPreMiddleware } from './apiPreMiddleware';
