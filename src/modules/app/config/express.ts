@@ -1,9 +1,9 @@
 import express, { Express } from 'express';
-import { getLogger } from '../../logger';
-import { apiRoutes, healthCheckRoutes } from './routes';
-import { appConfig } from '../app';
-import { postMiddlewares, preMiddlewares } from './middlewares';
-import { initMiddleware, initRoutes, startExpressServer } from './utils';
+import { getLogger } from '../logger';
+import { apiRoutes, healthCheckRoutes } from '../routes';
+import { appConfig } from './app';
+import { postMiddlewares, preMiddlewares } from '../middlewares';
+import { initMiddleware, initRoutes, startExpressServer } from '../utils/express';
 
 const logKey = '## EXPRESS:INTIALIZATION';
 const logger = getLogger();

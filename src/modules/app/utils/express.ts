@@ -1,5 +1,5 @@
 import { Express, NextFunction, Request, Response, Router } from 'express';
-import { ExpressRoute, ExpressRouter, IExpressMiddleware } from '../../types/express';
+import { ExpressRoute, ExpressRouter, IExpressMiddleware } from '../types/express';
 
 export const initMiddleware = (app: Express, middlewares: IExpressMiddleware[] = []): void => {
   middlewares.forEach(middleware => {

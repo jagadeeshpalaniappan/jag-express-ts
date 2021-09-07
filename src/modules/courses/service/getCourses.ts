@@ -1,4 +1,4 @@
-import { AppError } from '../../app/error';
+import { AppError } from '../../common/error';
 import { Logger } from '../../app/types/logger';
 import { Course, CourseDocument } from '../models/Course';
 export const getCourses = async (logger: Logger): Promise<CourseDocument[]> => {

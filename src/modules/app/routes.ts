@@ -1,7 +1,7 @@
-import appCtrl from '../../../controller';
-import { routes as courseRoutes } from '../../../courses/routes';
-import { routes as authRoutes } from '../../../auth/routes';
-import { ExpressRoute } from '../../types/express';
+import appCtrl from './controller';
+import { routes as courseRoutes } from '../courses/routes';
+import { routes as authRoutes } from '../auth/routes';
+import { ExpressRoute } from './types/express';
 
 export const healthCheckRoutes: ExpressRoute[] = [
   {

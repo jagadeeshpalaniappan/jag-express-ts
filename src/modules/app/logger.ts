@@ -1,4 +1,4 @@
-import { AppError, getErr } from './error';
+import { AppError, getErr } from '../common/error';
 import winstonLoggerInst from './config/winston';
 import { Logger } from './types/logger';
 

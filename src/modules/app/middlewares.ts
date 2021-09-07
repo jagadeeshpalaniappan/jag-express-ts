@@ -1,8 +1,8 @@
 import compression from 'compression'; // compresses requests
 import express, { NextFunction, Request, Response } from 'express';
 import lusca from 'lusca';
-import { authErrorHandler } from '../../../auth/middleware/authErrorHandler';
-import { IExpressMiddleware } from '../../types/express';
+import { authErrorHandler } from '../auth/middleware/authErrorHandler';
+import { IExpressMiddleware } from './types/express';
 
 const customMiddleware = (): IExpressMiddleware => {
   return (_req: Request, _res: Response, next: NextFunction) => {
