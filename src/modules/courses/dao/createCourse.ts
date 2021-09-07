@@ -1,12 +1,12 @@
-import courseDao from '../dao';
+import { Course, CourseDocument } from '../models/Course';
 import { Logger } from '../../app/types/logger';
-import { CourseDocument } from '../models/Course';
 
 export const createCourse = async (logger: Logger, course: CourseDocument): Promise<CourseDocument> => {
-  const logKey = 'courseSvc.createCourse';
+  const logKey = 'courseDao.createCourse';
   try {
     logger.start(logKey);
-    const data = await courseDao.createCourse(logger, course);
+    const courseDoc = new Course(course);
+    const data = await courseDoc.save();
     logger.end(logKey);
     return data;
   } catch (error) {
