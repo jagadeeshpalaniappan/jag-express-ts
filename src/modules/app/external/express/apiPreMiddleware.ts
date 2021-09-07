@@ -1,11 +1,9 @@
-import bodyParser from 'body-parser';
 import compression from 'compression'; // compresses requests
-import { Express } from 'express';
+import express, { Express } from 'express';
 import lusca from 'lusca';
 export const initApiPreMiddleware = (app: Express): void => {
   app.use(compression());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(express.json());
 
   app.use(lusca.xframe('SAMEORIGIN'));
   app.use(lusca.xssProtection(true));
