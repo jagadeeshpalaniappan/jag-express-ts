@@ -4,7 +4,7 @@ import { apiRoutes, healthCheckRoutes } from '../routes';
 import { appConfig } from './app';
 import { postMiddlewares, preMiddlewares } from '../middlewares';
 import { initMiddleware, initRoutes, startExpressServer } from '../utils/express';
-import { initJobsUiMiddleware } from '../jobs';
+import { initJobsUiMiddleware } from './bull-board';
 
 const logKey = '## EXPRESS:INTIALIZATION';
 const logger = getLogger();
