@@ -3,7 +3,7 @@ import authService from '../service';
 import { IExpressReq, IExpressRes, IExpressNextFn } from '../../app/types/express';
 
 export const bindAuthUser = async (req: IExpressReq, res: IExpressRes, next: IExpressNextFn): Promise<void> => {
-  const logKey = 'authCtrl.getAuths';
+  const logKey = 'authMw.bindAuthUser';
   const logger = getLogger();
   logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);
   try {

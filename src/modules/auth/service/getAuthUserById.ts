@@ -2,7 +2,7 @@ import { Logger } from '../../app/types/logger';
 import { Auth, AuthDocument } from '../models/Auth';
 
 export const getAuthUserById = async (logger: Logger, id: string): Promise<AuthDocument> => {
-  const logKey = 'authSvc.signIn';
+  const logKey = 'authSvc.getAuthUserById';
   try {
     logger.start(logKey);
     const autDoc = await Auth.findById(id);
