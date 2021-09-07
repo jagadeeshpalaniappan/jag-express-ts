@@ -1,15 +1,17 @@
 import argon2 from 'argon2';
-import { Logger } from '../../app/types/logger';
+import { getLogger } from '../../app/logger';
+import { Meta } from '../../app/types/meta';
 
-export const comparePassword = async (logger: Logger, password1: string, password2: string): Promise<boolean> => {
+export const comparePassword = async (meta: Meta, password1: string, password2: string): Promise<boolean> => {
   const logKey = 'authSvc.comparePassword';
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
+    logger.start();
     const isValidPassword = await argon2.verify(password1, password2);
-    logger.end(logKey);
+    logger.end();
     return isValidPassword;
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(error);
     throw error;
   }

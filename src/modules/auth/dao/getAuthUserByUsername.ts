@@ -1,15 +1,17 @@
-import { Logger } from '../../app/types/logger';
+import { Meta } from '../../app/types/meta';
+import { getLogger } from '../../app/logger';
 import { Auth, AuthDocument } from '../models/Auth';
 
-export const getAuthUserByUsername = async (logger: Logger, username: string): Promise<AuthDocument> => {
+export const getAuthUserByUsername = async (meta: Meta, username: string): Promise<AuthDocument> => {
   const logKey = 'authDao.getAuthUserByUsername';
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
+    logger.start();
     const autDoc = await Auth.findOne({ username });
-    logger.end(logKey);
+    logger.end();
     return autDoc;
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(error);
     throw error;
   }

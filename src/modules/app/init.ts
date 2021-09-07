@@ -4,17 +4,17 @@ import { getLogger } from './logger';
 import { App } from './types/init';
 
 const logKey = '## APP:INTIALIZATION';
-const logger = getLogger();
+const logger = getLogger(logKey);
 
 export const initApp = async (): Promise<App> => {
   try {
-    logger.start(logKey);
+    logger.start();
     const mongooseDb = await initMongoose();
     const expressApp = await initExpress();
-    logger.end(logKey);
+    logger.end();
     return { mongooseDb, expressApp };
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(error);
     process.exit(1);
   }

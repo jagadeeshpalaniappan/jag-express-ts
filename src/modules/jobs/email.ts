@@ -8,10 +8,9 @@ const logKey = 'emailJob';
 
 emailJob.process(function (job, done) {
   const { data, meta } = job.data;
-  const logger = getLogger();
-  logger.setTraceInfo('xb3Id', meta.xb3Id);
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
+    logger.start();
     logger.info(JSON.stringify(data));
 
     // transcode video asynchronously and report progress
@@ -24,11 +23,11 @@ emailJob.process(function (job, done) {
 
     setTimeout(() => {
       job.progress(100);
-      logger.end(logKey);
+      logger.end();
       done(null, { result: 'EMAIL-SENT' }); // JOB:SUCCESS
     }, 10000);
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     done(new Error('error sending email')); // JOB:ERROR
   }
 });

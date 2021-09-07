@@ -5,7 +5,7 @@ import { appConfig } from './app';
 import { getLogger } from '../logger';
 
 const logKey = '## MONGOOSE:INTIALIZATION';
-const logger = getLogger();
+const logger = getLogger(logKey);
 
 // use: bluebird promise in mongoose
 mongoose.Promise = bluebird;
@@ -19,12 +19,12 @@ const OPTIONS = { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopolog
  */
 export const initMongoose = async (): Promise<Db> => {
   try {
-    logger.start(logKey);
+    logger.start();
     const { connection } = await mongoose.connect(URL, OPTIONS);
-    logger.end(logKey);
+    logger.end();
     return connection.db;
   } catch (err) {
-    logger.failed(logKey);
+    logger.failed();
     throw err;
   }
 };

@@ -1,16 +1,18 @@
+import { getLogger } from '../../app/logger';
+import { Meta } from '../../app/types/meta';
 import { AppError } from '../../common/error';
-import { Logger } from '../../app/types/logger';
 import { Course, CourseDocument } from '../models/Course';
-export const getCourses = async (logger: Logger): Promise<CourseDocument[]> => {
+export const getCourses = async (meta: Meta): Promise<CourseDocument[]> => {
   const logKey = 'courseDao.getCourses';
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
+    logger.start();
     const query = {};
     const courses = await Course.find(query);
-    logger.end(logKey);
+    logger.end();
     return courses;
   } catch (err) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(logKey, err);
     throw new AppError({ code: 'GET_COURSES_DB_ERR', msg: 'Get Courses DB Error', err });
   }

@@ -1,15 +1,18 @@
-import { Logger } from '../../app/types/logger';
+import { getLogger } from '../../app/logger';
+import { Meta } from '../../app/types/meta';
 import courseDao from '../dao';
 import { CourseDocument } from '../models/Course';
-export const getCourses = async (logger: Logger): Promise<CourseDocument[]> => {
+export const getCourses = async (meta: Meta): Promise<CourseDocument[]> => {
   const logKey = 'courseSvc.getCourses';
+  const logger = getLogger(logKey, meta);
+
   try {
-    logger.start(logKey);
-    const courses = await courseDao.getCourses(logger);
-    logger.end(logKey);
+    logger.start();
+    const courses = await courseDao.getCourses(meta);
+    logger.end();
     return courses;
   } catch (err) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(logKey, err);
     throw err;
   }

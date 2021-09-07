@@ -7,12 +7,12 @@ import { initMiddleware, initRoutes, startExpressServer } from '../utils/express
 import { initJobsUiMiddleware } from './bull-board';
 
 const logKey = '## EXPRESS:INTIALIZATION';
-const logger = getLogger();
+const logger = getLogger(logKey);
 
 const PORT = appConfig.express.port;
 export const initExpress = async (): Promise<Express> => {
   try {
-    logger.start(logKey);
+    logger.start();
     const app = express();
     initRoutes(app, '', [], healthCheckRoutes); // init: healthCheckRoutes
     initMiddleware(app, preMiddlewares); // init: preMiddlewares
@@ -20,11 +20,11 @@ export const initExpress = async (): Promise<Express> => {
     initRoutes(app, '/api', [], apiRoutes); // init: apiRoutes
     initMiddleware(app, postMiddlewares); // init: postMiddlewares
     await startExpressServer(app, PORT); // start: expressServer
-    logger.end(logKey);
+    logger.end();
     logger.info(logKey, `http://localhost:${PORT} in ${app.get('env')} mode`);
     return app;
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     throw error;
   }
 };

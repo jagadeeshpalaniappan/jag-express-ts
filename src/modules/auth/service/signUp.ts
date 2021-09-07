@@ -7,22 +7,22 @@ import { getHashedPassword } from '../utils';
 
 export const signUp = async (meta: Meta, auth: any): Promise<AuthDocument> => {
   const logKey = 'authSvc.signUp';
-  const logger = getLogger();
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
+    logger.start();
     const { username, password, roles } = auth;
-    const { hashedPassword, salt } = await getHashedPassword(logger, password);
+    const { hashedPassword, salt } = await getHashedPassword(meta, password);
     const authUser = { username, password: hashedPassword, salt, roles };
-    const data = await authDao.createAuthUser(logger, authUser);
+    const data = await authDao.createAuthUser(meta, authUser);
 
     // send: email
     const job = await emailJob.add({ data: { username }, meta });
     logger.info(logKey, job);
 
-    logger.end(logKey);
+    logger.end();
     return data;
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     throw error;
   }
 };

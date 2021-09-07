@@ -1,18 +1,18 @@
 import { IExpressReq, IExpressRes } from '../../app/types/express';
-import { getLogger } from '../../app/logger';
+import { getLogger, getMeta } from '../../app/logger';
 import authService from '../service';
 
 export const signIn = async (req: IExpressReq, res: IExpressRes): Promise<void> => {
   const logKey = 'authCtrl.signIn';
-  const logger = getLogger();
-  logger.setTraceInfo('xb3Id', <string>req.headers['xb3id']);
+  const meta = getMeta(req);
+  const logger = getLogger(logKey, meta);
   try {
-    logger.start(logKey);
-    const data = await authService.signIn(logger, req.body);
-    logger.end(logKey);
+    logger.start();
+    const data = await authService.signIn(meta, req.body);
+    logger.end();
     res.json(data).status(200);
   } catch (error) {
-    logger.failed(logKey);
+    logger.failed();
     logger.error(error);
     res.json({ error }).status(500);
   }

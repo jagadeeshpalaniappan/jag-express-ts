@@ -1,5 +1,5 @@
 interface LoggerFn {
-  (logMessage?: string, ...any: any): void;
+  (logMessage?: any, ...any: any): void;
 }
 
 export interface LoggerTraceInfo {
@@ -15,7 +15,4 @@ export interface Logger {
   start?: LoggerFn;
   end?: LoggerFn;
   failed?: LoggerFn;
-
-  traceInfo: LoggerTraceInfo;
-  setTraceInfo?: (key: string, value: string) => void;
 }
