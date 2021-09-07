@@ -1,5 +1,5 @@
 import { AppError, getErr } from './error';
-import winstonLoggerInst from './external/winston';
+import winstonLoggerInst from './config/winston';
 import { Logger } from './types/logger';
 
 export const START = 'START';

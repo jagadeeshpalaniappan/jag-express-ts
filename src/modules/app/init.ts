@@ -1,5 +1,5 @@
-import { initExpress } from './external/express/init';
-import { initMongoose } from './external/mongoose';
+import { initExpress } from './config/express/init';
+import { initMongoose } from './config/mongoose';
 import { getLogger } from './logger';
 import { App } from './types/init';
 
