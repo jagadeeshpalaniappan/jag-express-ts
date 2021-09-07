@@ -1,11 +1,9 @@
 import express, { Express } from 'express';
-import { appConfig } from '../app';
 import { getLogger } from '../../logger';
-import { initApiPostMiddleware } from './apiPostMiddleware';
-import { initApiPreMiddleware } from './apiPreMiddleware';
-import { initApiRoutes } from './apiRoutesMiddleware';
-import { initHealthCheckRoutes } from './healthCheckRoutes';
-import { startExpressServer } from './startExpressServer';
+import { apiRoutes, healthCheckRoutes } from './routes';
+import { appConfig } from '../app';
+import { postMiddlewares, preMiddlewares } from './middlewares';
+import { initMiddleware, initRoutes, startExpressServer } from './utils';
 
 const logKey = '## EXPRESS:INTIALIZATION';
 const logger = getLogger();
@@ -15,11 +13,11 @@ export const initExpress = async (): Promise<Express> => {
   try {
     logger.start(logKey);
     const app = express();
-    initHealthCheckRoutes(app);
-    initApiPreMiddleware(app);
-    initApiRoutes(app);
-    initApiPostMiddleware(app);
-    await startExpressServer(app);
+    initRoutes(app, '', [], healthCheckRoutes); // init: healthCheckRoutes
+    initMiddleware(app, preMiddlewares); // init: preMiddlewares
+    initRoutes(app, '/api', [], apiRoutes); // init: apiRoutes
+    initMiddleware(app, postMiddlewares); // init: postMiddlewares
+    await startExpressServer(app, PORT); // start: expressServer
     logger.end(logKey);
     logger.info(logKey, `http://localhost:${PORT} in ${app.get('env')} mode`);
     return app;

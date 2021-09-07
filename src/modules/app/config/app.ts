@@ -2,7 +2,7 @@
 
 export const appConfig = {
   express: {
-    port: process.env.PORT || 3000,
+    port: parseInt(process.env.PORT, 10) || 3000,
   },
   mongoose: {
     url: process.env.MONGODB_URI,

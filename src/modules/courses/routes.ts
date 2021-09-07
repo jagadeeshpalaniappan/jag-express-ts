@@ -1,12 +1,24 @@
-import { Router } from 'express';
-import { getCourses } from './controller/getCourses';
-import { createCourse } from './controller/createCourse';
-import { isAuth } from '../auth/middleware/isAuth';
-import { canAccess } from '../auth/middleware/canAccess';
+import courseCtrl from './controller';
 import { bindAuthUser } from '../auth/middleware/bindAuthUser';
+import { canAccess } from '../auth/middleware/canAccess';
+import { isAuth } from '../auth/middleware/isAuth';
+import { ExpressRoute } from '../app/types/express';
 
-const courseRoutes = Router();
-courseRoutes.get('', isAuth, canAccess(['ui.course.list']), bindAuthUser, getCourses);
-courseRoutes.post('', createCourse);
-
-export { courseRoutes };
+export const routes: ExpressRoute[] = [
+  {
+    path: '/v1/courses',
+    method: 'get',
+    middlewares: [isAuth, canAccess(['ui.course.list']), bindAuthUser],
+    action: courseCtrl.getCourses,
+  },
+  {
+    path: '/v1/courses/:id',
+    method: 'get',
+    action: courseCtrl.getCourses,
+  },
+  {
+    path: '/v1/courses',
+    method: 'post',
+    action: courseCtrl.createCourse,
+  },
+];

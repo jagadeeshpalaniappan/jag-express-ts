@@ -1,6 +1,6 @@
 import { getLogger } from '../../app/logger';
 import authService from '../service';
-import { IExpressNextFn, IExpressReq, IExpressRes } from '../types';
+import { IExpressReq, IExpressRes, IExpressNextFn } from '../../app/types/express';
 
 export const bindAuthUser = async (req: IExpressReq, res: IExpressRes, next: IExpressNextFn): Promise<void> => {
   const logKey = 'authCtrl.getAuths';

@@ -1,6 +1,6 @@
 import { getLogger } from '../../app/logger';
 import authService from '../service';
-import { IExpressReq, IExpressRes } from '../types';
+import { IExpressReq, IExpressRes } from '../../app/types/express';
 
 export const signUp = async (req: IExpressReq, res: IExpressRes): Promise<void> => {
   const logKey = 'authCtrl.signUp';

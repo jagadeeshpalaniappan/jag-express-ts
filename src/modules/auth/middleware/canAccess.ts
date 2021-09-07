@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import { IExpressReq, IExpressRes } from '../types';
+import { IExpressReq, IExpressRes } from '../../app/types/express';
 
 export const canAccess = (resourceIds: string[]) => {
   return (req: IExpressReq, res: IExpressRes, next: NextFunction): void => {

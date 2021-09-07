@@ -1,6 +1,6 @@
 import jwt from 'express-jwt';
 import { appConfig } from '../../app/config/app';
-import { IExpressReq } from '../types';
+import { IExpressReq } from '../../app/types/express';
 
 /**
  * We are assuming that the JWT will come in a header with the form

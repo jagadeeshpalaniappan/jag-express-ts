@@ -6,11 +6,3 @@ export interface IAuthToken {
   roles: string[];
   exp: number;
 }
-
-export interface IExpressReq extends Request {
-  token: IAuthToken;
-}
-
-export type IExpressRes = Response;
-
-export type IExpressNextFn = NextFunction;

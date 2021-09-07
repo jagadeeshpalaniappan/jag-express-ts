@@ -1,5 +1,5 @@
 import { getLogger } from '../../app/logger';
-import { IExpressReq, IExpressRes } from '../../auth/types';
+import { IExpressReq, IExpressRes } from '../../app/types/express';
 import courseService from '../service';
 
 export const getCourses = async (req: IExpressReq, res: IExpressRes): Promise<void> => {
