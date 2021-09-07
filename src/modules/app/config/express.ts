@@ -4,6 +4,7 @@ import { apiRoutes, healthCheckRoutes } from '../routes';
 import { appConfig } from './app';
 import { postMiddlewares, preMiddlewares } from '../middlewares';
 import { initMiddleware, initRoutes, startExpressServer } from '../utils/express';
+import { initJobsUiMiddleware } from '../jobs';
 
 const logKey = '## EXPRESS:INTIALIZATION';
 const logger = getLogger();
@@ -15,6 +16,7 @@ export const initExpress = async (): Promise<Express> => {
     const app = express();
     initRoutes(app, '', [], healthCheckRoutes); // init: healthCheckRoutes
     initMiddleware(app, preMiddlewares); // init: preMiddlewares
+    initJobsUiMiddleware(app); // init: jobsUI
     initRoutes(app, '/api', [], apiRoutes); // init: apiRoutes
     initMiddleware(app, postMiddlewares); // init: postMiddlewares
     await startExpressServer(app, PORT); // start: expressServer
