@@ -16,8 +16,7 @@ export const signUp = async (meta: Meta, auth: any): Promise<AuthDocument> => {
     const data = await authDao.createAuthUser(meta, authUser);
 
     // send: email
-    const job = await emailJob.add({ data: { username }, meta });
-    logger.info(logKey, job);
+    await emailJob.add({ data: { username }, meta });
 
     logger.end();
     return data;
