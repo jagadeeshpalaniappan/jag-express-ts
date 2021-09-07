@@ -1,7 +1,7 @@
 import bluebird from 'bluebird';
 import { Db } from 'mongodb';
 import mongoose from 'mongoose';
-import { appConfig } from './config';
+import { appConfig } from './app';
 import { getLogger } from '../logger';
 
 const logKey = '## MONGOOSE:INTIALIZATION';

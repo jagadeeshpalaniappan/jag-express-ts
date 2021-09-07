@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { appConfig } from '../../app/config/config';
+import { appConfig } from '../../app/config/app';
 export const generateToken = (id: string, username: string, roles: Array<string>): string => {
   const today = new Date();
   const exp = new Date(today);
