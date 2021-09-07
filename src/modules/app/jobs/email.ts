@@ -1,5 +1,5 @@
 import Bull from 'bull';
-import { getLogger } from '../app/logger';
+import { getLogger } from '../logger';
 
 const bullConfig = { redis: { port: 6379, host: '127.0.0.1', password: '' } };
 export const emailJob = new Bull('send-email', bullConfig);

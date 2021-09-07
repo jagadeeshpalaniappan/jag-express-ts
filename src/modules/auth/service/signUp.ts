@@ -1,6 +1,6 @@
 import { getLogger } from '../../app/logger';
 import { Meta } from '../../app/types/meta';
-import { emailJob } from '../../jobs/email';
+import { emailJob } from '../../app/jobs/email';
 import authDao from '../dao';
 import { AuthDocument } from '../models/Auth';
 import { getHashedPassword } from '../utils';
